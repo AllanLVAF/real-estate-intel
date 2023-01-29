@@ -1,0 +1,10 @@
+{
+    "vivareal": {
+        "baseUrl": "https://www.vivareal.com.br",
+        "endpoints": [
+            {
+                "path": "/venda/sp/sao-paulo/lote-terreno_residencial/"
+            }
+        ]
+    }
+}

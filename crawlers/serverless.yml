@@ -1,0 +1,17 @@
+service: crawlers
+frameworkVersion: "3"
+
+custom:
+  a: 1
+
+provider:
+  name: "aws"
+  runtime: "nodejs18.x"
+  region: "us-west-2"
+
+  environment:
+    b: 2
+
+  ecr:
+    images:
+      
