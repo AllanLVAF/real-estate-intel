@@ -18,8 +18,6 @@ module.exports = async () => {
 
     for (const p of pages) {
         await new Promise(r => setTimeout(r, 2500));
-        // await page.waitForSelector('.js-card-selector');
-        // const offerUrls = await page.$$eval(".js-card-selector > article > a", el => el.map(link => link.href))
         const offerUrls = await page.$$eval('[data-type="property"] > div > article > a', el => el.map(link => link.href))
         console.log("Got offers " + offerUrls)
         console.log("Got offers amount " + offerUrls.length)
