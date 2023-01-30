@@ -4,12 +4,14 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start:": "node index.js"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@aws-sdk/client-location": "^3.259.0",
+    "dotenv": "^16.0.3",
     "puppeteer": "^19.6.2",
     "serverless": "^3.27.0"
   }

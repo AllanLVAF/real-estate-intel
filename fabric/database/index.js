@@ -3,10 +3,10 @@ const { DynamoDBDocument } = require("@aws-sdk/lib-dynamodb");
 // const { marshall, unmarshall } = require("@aws-sdk/util-dynamodb");
 
 const options = {
-    region: "us-west-2",
+    region: process.env.region,
     credentials: {
-        accessKeyId: "AKIATPG6MO7F4NUV4DWO",
-        secretAccessKey: "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",
+        accessKeyId: process.env.accessKeyId,
+        secretAccessKey: process.env.secretAccessKey,
     }
 };
 const ddbClient = new DynamoDB(options);

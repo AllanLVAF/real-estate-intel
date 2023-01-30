@@ -39,7 +39,8 @@ module.exports = {
     },
 
     getToCrawl: async function() {
-        const threshold = unixTimestamp() - (2 * 60 * 60) // 2h ago
+        // const threshold = unixTimestamp() - (2 * 60 * 60) // 2h ago
+        const threshold = unixTimestamp() - (2 * 60)
         const { Items: [item] } = await db.scan({
             TableName,
             FilterExpression: 'lastCrawled < :threshold',

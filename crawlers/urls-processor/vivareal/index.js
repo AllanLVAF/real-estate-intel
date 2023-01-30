@@ -1,10 +1,20 @@
 const path = require("path");
+const crypto = require("crypto")
 const puppeteer = require("puppeteer");
+const { LocationClient, CreatePlaceIndexCommand, DeletePlaceIndexCommand, SearchPlaceIndexForTextCommand } = require("@aws-sdk/client-location");
 const offersClient = require("../../../fabric/clients/offers");
 
 const currentFolder = path.basename(__dirname);
 const websiteID = currentFolder;
 const website = require("../../websites.json")[websiteID];
+
+const locationClient = new LocationClient({
+    region: process.env.region,
+    credentials: {
+        accessKeyId: process.env.accessKeyId,
+        secretAccessKey: process.env.secretAccessKey,
+    }
+});
 
 const formatPrice = (price) => {
     // Removes anything but numbers
@@ -47,7 +57,33 @@ module.exports = async () => {
         data.address = address;
         console.log(data.address);
 
-        // TODO: Use https://developers.google.com/maps/documentation/geocoding/?csw=1 to convert address into coordinates
+        // Gets coordinates
+        const IndexName = `property_${crypto.randomUUID()}`;
+
+        await locationClient.send(new CreatePlaceIndexCommand({
+            DataSource: "Here",
+            IndexName,
+        }));
+
+        try {
+            const command = new SearchPlaceIndexForTextCommand({
+                IndexName,
+                Text: data.address,
+                MaxResults: 1,
+                Language: "pt-BR",
+                // FilterCountries: "BRA",
+            });
+            const response = await locationClient.send(command);
+            const [lat, long] = response.Results[0].Place.Geometry.Point;
+            data.coordinates = JSON.stringify([lat, long]);
+        } catch (e) {
+            console.log("error on getting/storing coordinates");
+            console.log(e)
+        }
+
+        await locationClient.send(new DeletePlaceIndexCommand({
+            IndexName,
+        }));
     
         await offersClient.putOfferData(data);
     }

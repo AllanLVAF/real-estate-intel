@@ -4,6 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "start": "0",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
@@ -12,6 +13,7 @@
   "dependencies": {
     "@aws-sdk/client-dynamodb": "^3.259.0",
     "@aws-sdk/lib-dynamodb": "^3.259.0",
-    "@aws-sdk/util-dynamodb": "^3.259.0"
+    "@aws-sdk/util-dynamodb": "^3.259.0",
+    "dotenv": "^16.0.3"
   }
 }

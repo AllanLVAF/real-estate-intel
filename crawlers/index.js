@@ -1,7 +1,7 @@
+require('dotenv').config()
 const urlsUpdater = require("./urls-updater/vivareal");
 const urlsProcessor = require("./urls-processor/vivareal");
-const actions = ["update-urls", "process-urls"];
-const action = actions[1];
+const action = process.env.action;
 
 (async () => {
     if (action === "update-urls") {
