@@ -6,7 +6,6 @@ const offersClient = require("../../../fabric/clients/offers");
 
 const currentFolder = path.basename(__dirname);
 const websiteID = currentFolder;
-const website = require("../../websites.json")[websiteID];
 
 const locationClient = new LocationClient({
     region: process.env.region,
